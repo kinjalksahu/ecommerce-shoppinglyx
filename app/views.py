@@ -11,15 +11,19 @@ from datetime import date
 
 
 class ProductView(View):
- totalitem = 0
- def get(self, request):
-  topwears = Product.objects.filter(category='TW')
-  bottomwears = Product.objects.filter(category='BW')
-  mobiles = Product.objects.filter(category='M')
-  if request.user.is_authenticated:
-    totalitem = len(Cart.objects.filter(user=request.user))
-  return render(request, 'app/home.html', {'topwears':topwears, 'bottomwears':bottomwears, 'mobiles':mobiles, 'totalitem':totalitem})
-
+    def get(self, request):
+        topwears = Product.objects.filter(category='TW')
+        bottomwears = Product.objects.filter(category='BW')
+        mobiles = Product.objects.filter(category='M')
+        totalitem = 0
+        if request.user.is_authenticated:
+            totalitem = len(Cart.objects.filter(user=request.user))
+        return render(request, 'app/home.html', {
+            'topwears': topwears,
+            'bottomwears': bottomwears,
+            'mobiles': mobiles,
+            'totalitem': totalitem
+        })
 # def product_detail(request):
 #  return render(request, 'app/productdetail.html')
 
