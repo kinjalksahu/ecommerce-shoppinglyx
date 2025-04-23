@@ -5,6 +5,16 @@ Shoppinglyx is a static Django-based shopping website designed to showcase produ
 ![Home Page Screenshot](https://github.com/geekyshow1/shoppinglyx/blob/main/Screenshots/Home.jpeg)
 
 ---
+---
+
+## Live Demo
+
+The project is deployed on **Render**. You can access the live site here:
+
+[https://ecommerce-shoppinglyx.onrender.com/](https://ecommerce-shoppinglyx.onrender.com/)
+
+---
+
 
 ## Features
 
