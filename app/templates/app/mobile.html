@@ -1,0 +1,44 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block title %}Mobile{% endblock title %}
+{% block main-content %}
+<div class="container my-5">
+ <div class="row">
+  <!-- Sidebar for Mobile Filtering -->
+  <div class="col-sm-3">
+    <div class="list-group"> 
+        <a href="{% url 'mobile' %}" class="list-group-item list-group-item-action {% if not request.resolver_match.kwargs.data %}active{% endif %}">All Mobiles</a> 
+        <a href="{% url 'mobiledata' 'Redmi' %}" class="list-group-item list-group-item-action {% if request.resolver_match.kwargs.data == 'Redmi' %}active{% endif %}">Redmi</a> 
+        <a href="{% url 'mobiledata' 'Samsung' %}" class="list-group-item list-group-item-action {% if request.resolver_match.kwargs.data == 'Samsung' %}active{% endif %}">Samsung</a>  
+        <a href="{% url 'mobiledata' 'below' %}" class="list-group-item list-group-item-action {% if request.resolver_match.kwargs.data == 'Samsung' %}active{% endif %}">Below 10000</a>   
+        <a href="{% url 'mobiledata' 'above' %}" class="list-group-item list-group-item-action {% if request.resolver_match.kwargs.data == 'Samsung' %}active{% endif %}">Above 10000</a>   
+        
+    </div>
+  </div> 
+
+  <!-- Mobile Product List -->
+  <div class="col-sm-8">
+    <div class="row"> 
+        {% if mobiles %}
+            {% for product in mobiles %}
+                <div class="col-sm-4 text-center mb-4">
+                    <a href="{% url 'product-detail' product.id %}" class="btn">
+                        <div class="item">
+                            <img src="{{ product.product_image.url }}" alt="{{ product.title }}" height="300">
+                            <div class="fw-bold">{{ product.title }}</div> 
+                            <div class="fw-bold">
+                                Rs. {{ product.discounted_price }}
+                                <small class="fw-light text-decoration-line-through">Rs. {{ product.selling_price }}</small>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p class="text-center">No mobiles found.</p>  <!-- ✅ Message if no mobiles exist -->
+        {% endif %}
+    </div>
+  </div>
+ </div>
+</div>
+{% endblock main-content %}
